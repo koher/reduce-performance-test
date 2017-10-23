@@ -27,8 +27,17 @@ class ReducePerformanceTests: XCTestCase {
             XCTAssertEqual(ns.map { $0 * $0 }.reduce(0) { $0 + $1 }, squareSum)
         }
     }
-
+    
+    func testLazyMapReduce() {
+        measure {
+            XCTAssertEqual(ns.lazy.map { $0 * $0 }.reduce(0) { $0 + $1 }, squareSum)
+        }
+    }
+    
     static var allTests = [
         ("testReduce", testReduce),
+        ("testForLoop", testForLoop),
+        ("testMapReduce", testMapReduce),
+        ("testLazyMapReduce", testLazyMapReduce),
     ]
 }
